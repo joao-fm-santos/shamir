@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "shamir"
+version = "0.1.0"
+description = ""
+authors = ["joasan2 <joasan2@emea.corpdir.net>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+flask = "^2.2.3"
+redis = "^4.5.1"
+cryptography = "^39.0.1"
+pytz = "^2022.7.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
