@@ -1,4 +1,4 @@
-bind = "shamir.herokuapp.com"
+bind = "0.0.0.0:$PORT"
 workers = 1
 loglevel = "debug"
 
