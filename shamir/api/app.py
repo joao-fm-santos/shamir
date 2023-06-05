@@ -1,10 +1,5 @@
-"""
-
-
-"""
 from datetime import datetime, timedelta
 import os
-import pytz
 
 from flask import Flask, request
 
@@ -27,7 +22,7 @@ def create():
         return invalid_message 
 
     content['id'] = get_id()
-    content['expiration'] = content.get('expiration', datetime.now() + timedelta(seconds=10))
+    content['expiration'] = content.get('expiration', datetime.now() + timedelta(minutes=15))
     content['salt'] = salt
 
     # Create a sha256 hash of the secret id 
@@ -61,7 +56,12 @@ def get(id):
             "message": "This secret either no longer exists or it was already read",
         }, 400
 
-    # TODO: Check if secret has expired 
+    # Check if secret has expired 
+    if datetime.now() > datetime.strptime(stored_expiration, '%Y-%m-%d %H:%M:%S.%f'):
+        return {
+            "status": "Failed",
+            "message": "The secret has expired",
+        }, 400
 
     # After we fetch this value, just delete it 
     del datastore[id]
@@ -73,5 +73,3 @@ def get(id):
     }
     decrypted = cipher(new_content, salt, mode="decrypt")
     return {"success": "True", "message": decrypted}
-
-

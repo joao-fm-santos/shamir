@@ -1,6 +1,3 @@
-"""
-
-"""
 def validate(message: str, content: dict):
     invalid_content = (
         content is None or
