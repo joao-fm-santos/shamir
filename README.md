@@ -91,10 +91,6 @@ with the actual public IP or domain name of your AWS EC2 instance.
 In your `.zshrc`, add the following aliases:
 
 ```
-# Shamir API Aliases
-export ssc='shamir_create'
-export ssg='shamir_get'
-
 shamir_create() {
     SHAMIR_RESPONSE=$(
         curl -s -X POST -H "Content-Type: application/json" -d "{\"secret\": \"$1\"}" http://your-public-ip-or-domain/create
@@ -113,7 +109,7 @@ shamir_get() {
     echo "Secret copied from ID: '$1'"
 }
 ```
-This sets the `ssc` and `ssg` alias to the `shamir_create` and `shamir_get` functions, which get and create secrets directly in the API by doing `curl` requests.
+This sets the `shamir_create` and `shamir_get` functions, which get and create secrets directly in the API by doing `curl` requests.
 Please note that you need to replace your-public-ip-or-domain with the actual public IP or domain name of your AWS EC2 instance.
 
 Once you have done these modifications, save the file and run `source ~/.zshrc` to apply the aliases.
