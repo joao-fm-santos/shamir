@@ -82,16 +82,46 @@ Follow the guidelines below:
         Method: POST
         Response: { "message": "shared-secret" }
 
-Please note that you need to replace your-public-ip-or-domain 
+Please note that you need to replace your-public-ip-or-domain
 with the actual public IP or domain name of your AWS EC2 instance.
 
+### Setting aliases 
+
+In your `.zshrc`, add the following aliases:
+
+```
+# Shamir API Aliases
+export ssc='shamir_create'
+export ssg='shamir_get'
+
+shamir_create() {
+    SHAMIR_RESPONSE=$(
+        curl -s -X POST -H "Content-Type: application/json" -d "{\"secret\": \"$1\"}" http://your-public-ip-or-domain/create
+    )
+
+    echo $SHAMIR_RESPONSE | jq -r '.id' | xsel -b
+    echo "Secret created with ID: $(echo $SHAMIR_RESPONSE | jq -r '.id')"
+}
+
+shamir_get() {
+    SHAMIR_RESPONSE=$(
+        curl -s -X GET http://your-public-ip-or-domain/get/$1
+    )
+
+    echo $SHAMIR_RESPONSE | jq -r '.message' | xsel -b
+    echo "Secret copied from ID: '$1'"
+}
+```
+This sets the `ssc` and `ssg` alias to the `shamir_create` and `shamir_get` functions, which get and create secrets directly in the API by doing `curl` requests.
+Please note that you need to replace your-public-ip-or-domain with the actual public IP or domain name of your AWS EC2 instance.
+
+Once you have done these modifications, save the file and run `source ~/.zshrc` to apply the aliases.
 
 ## Additional Information
 
 - Make sure to open the necessary ports (e.g., port 80) in your AWS EC2 security group settings to allow inbound traffic.
 - Customize the Nginx configuration file (nginx.conf) and the Gunicorn command as per your requirements.
     
-
 ## License
 
 This project is licensed under the MIT License.
