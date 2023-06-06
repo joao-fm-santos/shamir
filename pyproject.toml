@@ -2,7 +2,7 @@
 name = "shamir"
 version = "0.1.0"
 description = ""
-authors = ["joasan2 <joasan2@emea.corpdir.net>"]
+authors = ["squerez"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
