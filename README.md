@@ -1,7 +1,8 @@
 # shamir
 
-![Shamir API Logo](shamir-api-logo.png)
+[![License: MIT](https://img.shields.io/badge/licence-mit-blue.svg)](LICENSE)
 
+## Introduction 
 The shamir is a one-time secret sharing application that allows users to 
 safely share secrets by using unique IDs as references. 
 
